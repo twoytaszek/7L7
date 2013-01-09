@@ -1,7 +1,4 @@
-5.times do |i|
-   File.open("temp.rb","w") { |f|
-     f.puts "module Temp\ndef Temp.var() #{i}; end\nend"
-   }
-   load "temp.rb"
-   puts Temp.var
- end
+10.times do |i|
+     val = i + 1
+     print "This is sentence number #{val}\n"
+end
