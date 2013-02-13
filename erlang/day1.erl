@@ -10,9 +10,21 @@ num_words(String) -> string:words(String).
 
 %% recursive attempt
 rec_num_words(String) -> rec_num_words(String, 0).
-rec_num_words(String, N) when String == "" -> 0;
+rec_num_words(String, N) when String == "" -> N;
 rec_num_words(String, N) -> 
-  "working on it...".
+  FirstSpace = string:chr(String, $  ),
+  Len = string:len(String),
+  Done = Len+1,
+  case FirstSpace of
+    0 -> N;
+    Done when FirstSpace > Len -> rec_num_words("", N);
+    _Else -> 
+      io:put_chars("FirstSpace: "),
+      io:put_chars(integer_to_list(FirstSpace)),
+      io:put_chars(string:sub_string(String, FirstSpace)),
+      io:nl(),
+      rec_num_words(string:sub_string(String, FirstSpace+1), N+1)
+  end.
 
 %% count up methods
 count_up(0,N) -> 
